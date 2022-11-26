@@ -1,7 +1,9 @@
-from django.shortcuts import redirect
+from django.http import HttpResponse, HttpResponseForbidden
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
+from django.views import View
 from django.views.generic import CreateView
-from webapp.models import Photo
+from webapp.models import Photo, Chosen
 from webapp.forms import PhotoForm
 
 
@@ -23,4 +25,15 @@ class PhotoCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('photo_detail', kwargs={'pk': self.object.pk})
+
+
+class PhotoChosenView(View):
+    def post(self, request, *args, **kwargs):
+        photo = get_object_or_404(Photo, pk=kwargs.get('pk'))
+        chosen, created = Chosen.objects.get_or_create(image=photo, user=request.user)
+        if created:
+            photo.save()
+            return HttpResponse("good")
+        else:
+            return HttpResponseForbidden()
 

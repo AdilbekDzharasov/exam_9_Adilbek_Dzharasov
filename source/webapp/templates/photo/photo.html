@@ -33,6 +33,27 @@ Photo
   </div>
 </div>
 
+<div class="container">
+    {% if  photo.chosens.all %}
+      <div class="table">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Пользователи добавившие фото в избранное</th>
+              </tr>
+            </thead>
+            <tbody>
+             {% for i in photo.chosens.all %}
+                 <tr>
+                     <td class="text"><p><a href="#" class="button cancel">{{ i.user }}</a></p><br/></td>
+                 </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+      </div>
+    {% endif %}
+</div>
+
 
 {% endblock %}
 

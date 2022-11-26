@@ -50,29 +50,21 @@ class Photo(models.Model):
         verbose_name_plural = 'Фотографии'
 
 
-# class Favorite(models.Model):
-#     user = models.ForeignKey(
-#         to=get_user_model(),
-#         related_name='favorite_articles',
-#         verbose_name='Избранное',
-#         null=False,
-#         on_delete=models.CASCADE
-#     )
-#     article = models.ForeignKey(
-#         to=Article,
-#         related_name='favorite_users',
-#         verbose_name='Избранное',
-#         null=False,
-#         on_delete=models.CASCADE
-#     )
-#     note = models.CharField(
-#         max_length=50,
-#         verbose_name='Текстовая заметка',
-#         null=False,
-#         blank=True
-#     )
+class Chosen(models.Model):
+    user = models.ForeignKey(
+        to=User,
+        on_delete=models.CASCADE,
+        related_name='user_chosen',
+        verbose_name='Пользователь'
+    )
+    image = models.ForeignKey(
+        to='webapp.Photo',
+        on_delete=models.CASCADE,
+        related_name='chosens',
+        verbose_name='Избр. фотография'
+    )
 
-    # class Meta:
-    #     verbose_name = 'Избранная запись'
-    #     verbose_name_plural = 'Избранные записи'
+    class Meta:
+        verbose_name = 'Избранная фотография'
+        verbose_name_plural = 'Избранные фотографии'
 
