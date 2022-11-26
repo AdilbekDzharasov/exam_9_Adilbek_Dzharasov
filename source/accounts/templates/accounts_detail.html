@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container">
+      <h4 class="mb-4">Данные пользователя</h4>
+        <div class="table">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Логин</th>
+                <th>Имя</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td class="text">{{ account.username }}</td>
+                  <td class="text">{{ account.first_name }}</td>
+                  <td class="text">{{ account.email }}</td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <h2 class="text-center clear mt-4 mb-4">Избранные фото:</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for i in account.user_chosen.all %}
+            <div class="col">
+                <div class="">
+                    <div class="card-body">
+                        <a href="{% url 'photo_detail' i.image.pk %}">
+                            <img class="card-img-right flex-auto d-none d-md-block" data-src="{{ i.image.image.url }}" alt="Thumbnail [200x250]" style="width: 350px; height: 300px;" src="{{ i.image.image.url }}" data-holder-rendered="true">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="album py-3">
+                   <div class="container">
+                       <div class="row">
+                              <div class="col">
+                                <div class="card mb-4 box-shadow">
+                                  <div class="card-body">
+                                    <h3 class="card-text"></h3>
+                                  </div>
+                                </div>
+                              </div>
+                       </div>
+                   </div>
+            </div>
+            {% endfor %}
+        </div>
+</div>
+
+{% if is_paginated %}
+  {% include 'partial/pagination.html' %}
+{% endif %}
+
+{% endblock %}
