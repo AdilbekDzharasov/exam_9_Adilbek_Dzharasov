@@ -20,7 +20,7 @@ Photo list
               <div class="mb-4" >
                 <a href="{% url 'photo_detail' photo.pk %}" class="btn btn-sm btn-outline-secondary">Детальный просмотр</a>
               </div>
-              <small class="text-muted">Создано: {{ photo.created_at }}</small>
+              <small class="text-muted">Создано: {{ photo.created_at|date:"d-m-Y h:i" }}</small>
             </div>
           </div>
         </div>

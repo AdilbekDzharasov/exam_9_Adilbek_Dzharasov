@@ -1,0 +1,35 @@
+[
+{
+  "model": "webapp.photo",
+  "pk": 7,
+  "fields": {
+    "image": "pics/009998_JrgD1WN.jpeg",
+    "sign": "Центральная Азия",
+    "created_at": "2022-11-26T09:25:10.689Z",
+    "author": 3,
+    "is_deleted": false
+  }
+},
+{
+  "model": "webapp.photo",
+  "pk": 8,
+  "fields": {
+    "image": "pics/Без_названия_1_gJ6QME9.jpeg",
+    "sign": "Тропики",
+    "created_at": "2022-11-26T09:26:15.464Z",
+    "author": 4,
+    "is_deleted": false
+  }
+},
+{
+  "model": "webapp.photo",
+  "pk": 9,
+  "fields": {
+    "image": "pics/Без_названия_tfACjTl.jpeg",
+    "sign": "Центральная Америка",
+    "created_at": "2022-11-26T09:27:45.398Z",
+    "author": 5,
+    "is_deleted": false
+  }
+}
+]
