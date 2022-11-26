@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
@@ -7,7 +8,7 @@ from webapp.models import Photo, Chosen
 from webapp.forms import PhotoForm
 
 
-class PhotoCreateView(CreateView):
+class PhotoCreateView(LoginRequiredMixin, CreateView):
     model = Photo
     template_name = 'photo/photo_add.html'
     form_class = PhotoForm
@@ -27,7 +28,7 @@ class PhotoCreateView(CreateView):
         return reverse('photo_detail', kwargs={'pk': self.object.pk})
 
 
-class PhotoChosenView(View):
+class PhotoChosenView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         photo = get_object_or_404(Photo, pk=kwargs.get('pk'))
         chosen, created = Chosen.objects.get_or_create(image=photo, user=request.user)
