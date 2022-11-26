@@ -3,7 +3,7 @@ from webapp.photo_views.photo_home import HomePhotoView
 from webapp.photo_views.photo_add import PhotoCreateView, PhotoChosenAddView
 from webapp.photo_views.photo_detail import PhotoDetailView
 from webapp.photo_views.photo_update import PhotoUpdateView
-from webapp.photo_views.photo_delete import PhotoDeleteView
+from webapp.photo_views.photo_delete import PhotoDeleteView, PhotoChosenDeleteView
 
 
 urlpatterns = [
@@ -13,8 +13,6 @@ urlpatterns = [
     path('photo/update/<int:pk>', PhotoUpdateView.as_view(), name='photo_update'),
     path('photo/delete/<int:pk>', PhotoDeleteView.as_view(), name='photo_delete'),
     path('photo/chosen/<int:pk>', PhotoChosenAddView.as_view(), name='photo_choose'),
-    # path('products/<int:pk>/review/add/', ProductReviewAddView.as_view(), name='product_review_add'),
-    # path('reviews/update/<int:pk>', ReviewUpdateView.as_view(), name='review_update'),
-    # path('reviews/delete/<int:pk>', ReviewDeleteView.as_view(), name='review_delete')
+    path('photo/chosen/delete/<int:pk>', PhotoChosenDeleteView.as_view(), name='photo_choose_delete')
 ]
 

@@ -44,7 +44,7 @@ Photo
             <tbody>
              {% for i in photo.chosens.all %}
                  <tr>
-                     <td class="text"><p><a href="#" class="button cancel">{{ i.user }}</a></p><br/></td>
+                     <td class="text"><p><a href="{% url 'account_detail' i.user.pk %}" class="button cancel">{{ i.user }}</a></p><br/></td>
                  </tr>
             {% endfor %}
             </tbody>

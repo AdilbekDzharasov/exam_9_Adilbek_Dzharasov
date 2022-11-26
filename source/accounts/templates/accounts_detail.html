@@ -36,6 +36,10 @@
                             <a href="{% url 'photo_detail' i.image.pk %}">
                                 <img class="card-img-right flex-auto d-none d-md-block" data-src="{{ i.image.image.url }}" alt="Thumbnail [200x250]" style="width: 350px; height: 300px;" src="{{ i.image.image.url }}" data-holder-rendered="true">
                             </a>
+                           <form action="{% url 'photo_choose_delete' i.image.pk %}" method="post">
+                              {% csrf_token %}
+                              <input  class="btn btn-sm btn-outline-secondary mt-4" type="submit" value="Удалить из избранного">
+                            </form>
                         </div>
                     </div>
                 </div>
