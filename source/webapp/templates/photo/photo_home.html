@@ -19,10 +19,12 @@ Photo list
               <p class="card-text mb-auto"></p>
               <div class="mb-4" >
                 <a href="{% url 'photo_detail' photo.pk %}" class="btn btn-sm btn-outline-secondary">Детальный просмотр</a>
-                <form action="{% url 'photo_choose' photo.pk %}" method="post">
-                  {% csrf_token %}
-                  <input  class="btn btn-sm btn-outline-secondary mt-4" type="submit" value="Добавить в избранное">
-                </form>
+                {% if user.is_authenticated %}
+                  <form action="{% url 'photo_choose' photo.pk %}" method="post">
+                    {% csrf_token %}
+                    <input  class="btn btn-sm btn-outline-secondary mt-4" type="submit" value="Добавить в избранное">
+                  </form>
+                {% endif %}
               </div>
               <small class="text-muted">Создано: {{ photo.created_at|date:"d-m-Y h:i" }}</small>
             </div>

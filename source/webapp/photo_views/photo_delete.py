@@ -19,7 +19,7 @@ class PhotoDeleteView(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
                or self.request.user.is_superuser
 
 
-class PhotoChosenDeleteView(View):
+class PhotoChosenDeleteView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         image = get_object_or_404(Photo, pk=kwargs.get('pk'))

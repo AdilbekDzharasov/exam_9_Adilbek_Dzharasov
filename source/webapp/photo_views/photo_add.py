@@ -28,7 +28,7 @@ class PhotoCreateView(LoginRequiredMixin, CreateView):
         return reverse('photo_detail', kwargs={'pk': self.object.pk})
 
 
-class PhotoChosenAddView(View):
+class PhotoChosenAddView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         image = get_object_or_404(Photo, pk=kwargs.get('pk'))
