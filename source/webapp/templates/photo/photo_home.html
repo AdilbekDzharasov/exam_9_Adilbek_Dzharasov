@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Photo list
+{% endblock %}
+
+{% block content %}
+{% include 'partial/simple_search.html' %}
+{% for photo in photos %}
+
+    <div class="album py-3 bg-light">
+      <div class="container">
+
+        <div class="col">
+          <div class="card flex-md-row mb-4 box-shadow h-md-300">
+              <img class="card-img-right flex-auto d-none d-md-block" data-src="{{ photo.image.url  }}" alt="Thumbnail [200x250]" style="width: 350px; height: 300px;" src="{{ photo.image.url }}" data-holder-rendered="true">
+            <div class="card-body d-flex flex-column align-items-start">
+              <h4 class="mb-4">{{ photo.author }}</h4>
+              <h5 class="mb-4">{{ photo.sign }}</h5>
+              <p class="card-text mb-auto"></p>
+              <div class="mb-4" >
+                <a href="{% url 'photo_detail' photo.pk %}" class="btn btn-sm btn-outline-secondary">View</a>
+
+                    <a href="{% url 'photo_update' photo.pk %}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil-fill"></i></a>
+                    <a href="{% url 'photo_delete' photo.pk %}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-trash-fill mb-3"></i></a>
+
+              </div>
+              <small class="text-muted">Создано: {{ photo.created_at }}</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+{% empty %}
+<div class="album py-3 bg-light">
+        <div class="container">
+
+          <div class="row">
+            <div class="col">
+              <div class="card mb-4 box-shadow">
+                <div class="card-body">
+                  <h3 class="card-text">Галерея пуста</h3>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+</div>
+{% endfor %}
+
+{% endblock %}

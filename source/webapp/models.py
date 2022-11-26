@@ -1,5 +1,8 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
+from webapp.managers import CustomManager
 
 
 class Photo(models.Model):
@@ -20,13 +23,24 @@ class Photo(models.Model):
         verbose_name='Время создания'
     )
     author = models.ForeignKey(
-        to=get_user_model(),
+        to=User,
         on_delete=models.CASCADE,
         related_name='photos',
         verbose_name='Автор',
-        null=False,
-        blank=False
+        blank=True
     )
+    is_deleted = models.BooleanField(
+        verbose_name='Удален',
+        default=False,
+        null=False
+    )
+
+    object = CustomManager()
+
+    def delete(self, using=None, keep_parents=False):
+        self.deleted_at = timezone.now()
+        self.is_deleted = True
+        self.save()
 
     def __str__(self):
         return f"{self.author} -- {self.sign}"
