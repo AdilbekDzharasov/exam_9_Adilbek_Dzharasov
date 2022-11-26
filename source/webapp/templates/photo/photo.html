@@ -20,6 +20,7 @@ Photo
              <h5 class=""></h5>
           <div class="mt-4">
             <a href="{% url 'photo_home' %}" class="btn btn-sm btn-outline-secondary">← Вернуться назад</a>
+            <a href="{% url 'photo_choose' photo.pk %}" class="btn btn-sm btn-outline-secondary">Добавить в избранное</a>
             <a href="{% url 'photo_update' photo.pk %}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil-fill"></i></a>
             <a href="{% url 'photo_delete' photo.pk %}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-trash-fill mb-3"></i></a>
           </div>

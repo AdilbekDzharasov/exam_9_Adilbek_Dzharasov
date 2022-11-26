@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
 from django.views import View
@@ -28,13 +28,14 @@ class PhotoCreateView(LoginRequiredMixin, CreateView):
         return reverse('photo_detail', kwargs={'pk': self.object.pk})
 
 
-class PhotoChosenView(LoginRequiredMixin, View):
+class PhotoChosenAddView(View):
+
     def post(self, request, *args, **kwargs):
-        photo = get_object_or_404(Photo, pk=kwargs.get('pk'))
-        chosen, created = Chosen.objects.get_or_create(image=photo, user=request.user)
-        if created:
-            photo.save()
-            return HttpResponse("good")
-        else:
-            return HttpResponseForbidden()
+        image = get_object_or_404(Photo, pk=kwargs.get('pk'))
+        user = request.user
+        for c in Chosen.objects.all():
+            if c.image.pk == image.pk and c.user.pk == user.pk:
+                Chosen.objects.filter(image=image, user=user).delete()
+        Chosen.objects.create(image=image, user=user)
+        return redirect('photo_home')
 

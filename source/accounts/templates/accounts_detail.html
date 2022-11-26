@@ -25,10 +25,10 @@
 
     </div>
 
+ <h2 class="text-center clear mt-4 mb-4">Избранные фото</h2>
     <div class="container">
         <div class="row row-cols-1 row-cols-md-3 g-4">
             {% if account.user_chosen.all %}
-            <h2 class="text-center clear mt-4 mb-4">Избранные фото:</h2>
                 {% for i in account.user_chosen.all %}
                 <div class="col">
                     <div class="">
